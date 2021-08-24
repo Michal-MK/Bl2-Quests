@@ -1,0 +1,6 @@
+.vs
+.idea
+bin
+obj
+Bl2 Client-Unity
+*.user

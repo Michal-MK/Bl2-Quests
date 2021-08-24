@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <RootNamespace>Bl2Common</RootNamespace>
+    <LangVersion>default</LangVersion>
+    <AssemblyName>Bl2Common</AssemblyName>
+  </PropertyGroup>
+
+<!--  <Target Name="PostBuild" AfterTargets="PostBuildEvent">-->
+<!--    <Exec Command="py $(OutDir)script.py" />-->
+<!--  </Target>-->
+
+</Project>
