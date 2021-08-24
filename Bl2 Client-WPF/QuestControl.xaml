@@ -19,9 +19,9 @@
 			<TextBlock Text="{Binding Name}"></TextBlock>
         </Grid>
 		<StackPanel Grid.Column="2" Orientation="Horizontal">
-	        <Button Content="Accept"/>
-	        <Button Content="Delete"/>
-	        <Button Content="Trigger"/>
+	        <Button Content="Accept" x:Name="AcceptBtn" Click="OnAccept"/>
+			<Button Content="Delete" x:Name="DeleteBtn" Click="OnDelete"/>
+			<Button Content="Trigger" x:Name="TriggerBtn" Click="OnTrigger"/>
 		</StackPanel>
     </Grid>
 </UserControl>

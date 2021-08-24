@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.ObjectModel;
 using System.Net;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Media.Animation;
 using Bl2Common;
-using Igor.TCP;
 
 namespace Bl2Client {
-	/// <summary>
-	/// Interaction logic for MainWindow.xaml
-	/// </summary>
 	public partial class MainWindow : Window {
 
 		private string Hostname => IPBox.Text;
@@ -18,8 +11,12 @@ namespace Bl2Client {
 
 		private Connection? connection;
 
+		public ObservableCollection<Quest> OpenQuests { get; } = new();
+		public ObservableCollection<Quest> AvailableQuests { get; } = new();
+
 		public MainWindow() {
 			InitializeComponent();
+			DataContext = this;
 		}
 
 		private async void OnConnect(object sender, RoutedEventArgs e) {
@@ -46,7 +43,17 @@ namespace Bl2Client {
 		}
 
 		private void OnFullSync(Quest[] obj) {
-			AvailableSource.ItemsSource = obj;
+			OpenQuests.Clear();
+			AvailableQuests.Clear();
+
+			foreach (Quest quest in obj) {
+				if (quest.Status == QuestStatus.NotAccepted) {
+					OpenQuests.Add(quest);
+				}
+				if (quest.Status == QuestStatus.Accepted) {
+					AvailableQuests.Add(quest);
+				}
+			}
 		}
 
 		private void OnExit(object sender, RoutedEventArgs e) {

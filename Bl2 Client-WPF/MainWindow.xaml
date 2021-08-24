@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Bl2Client"
         mc:Ignorable="d"
+		d:DataContext="{d:DesignInstance Type=local:MainWindow}"
         Title="MainWindow" Height="450" Width="800">
 	<Grid>
 		<Grid x:Name="LoginGrid" d:Visibility="Collapsed">
@@ -35,17 +36,17 @@
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<ItemsControl Grid.Column="0" x:Name="AvailableSource" HorizontalContentAlignment="Stretch">
+			<ItemsControl Grid.Column="0" ItemsSource="{Binding OpenQuests}" x:Name="AvailableSource" HorizontalContentAlignment="Stretch">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
 						<local:QuestControl Padding="1 2"/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
-			<ItemsControl Grid.Column="1" x:Name="TriggerSource">
+			<ItemsControl Grid.Column="1" ItemsSource="{Binding AvailableQuests}" x:Name="TriggerSource" HorizontalContentAlignment="Stretch">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>
-						<local:QuestControl/>
+						<local:QuestControl Padding="1 2"/>
 					</DataTemplate>
 				</ItemsControl.ItemTemplate>
 			</ItemsControl>
