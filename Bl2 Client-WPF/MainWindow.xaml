@@ -6,50 +6,54 @@
         xmlns:local="clr-namespace:Bl2Client"
         mc:Ignorable="d"
 		d:DataContext="{d:DesignInstance Type=local:MainWindow}"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Borderlands2 Quests Helper" MinHeight="450" Height="450" MinWidth="1025" Width="1200">
 	<Grid>
-		<Grid x:Name="LoginGrid" d:Visibility="Collapsed">
+		<Grid x:Name="LoginGrid" d:Visibility="Visible">
 			<Grid.RowDefinitions>
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
 				<RowDefinition Height="auto"/>
+				<RowDefinition Height="*"/>
+				<RowDefinition Height="auto"/>
 			</Grid.RowDefinitions>
 
 			<StackPanel Grid.Row="0">
-				<TextBlock Text="Hostname"/>
-				<TextBox x:Name="IPBox" Text="192.168.88.120"/>
+				<TextBlock Text="Hostname:" FontSize="48" FontWeight="DemiBold"/>
+				<TextBox x:Name="IPBox" Text="192.168.88.120" FontSize="36" Padding="20 0 0 0"/>
 			</StackPanel>
 
-			<StackPanel Grid.Row="1">
-				<TextBlock Text="Port"/>
-				<TextBox x:Name="PortBox" Text="4245"/>
+			<StackPanel Grid.Row="1" Margin="0 20 0 0">
+				<TextBlock Text="Port:" FontSize="48" FontWeight="DemiBold"/>
+				<TextBox x:Name="PortBox" Text="4245" FontSize="36" Padding="20 0 0 0"/>
 			</StackPanel>
 
-			<StackPanel Grid.Row="2">
-				<Button Content="_Connect" Click="OnConnect" IsDefault="True"/>
-				<Button Content="E_xit" Click="OnExit"/>
-			</StackPanel>
+			<Button Grid.Row="2" Content="_Connect" Click="OnConnect" IsDefault="True" Padding="80 20" Margin="0 20 0 0" HorizontalAlignment="Center" Background="ForestGreen"/>
+			<Button Grid.Row="4" Content="E_xit" Click="OnExit" HorizontalAlignment="Right" Padding="40 20" Margin="0 0 20 20" Background="IndianRed"/>
 		</Grid>
 
-		<Grid x:Name="MainGrid" Visibility="Collapsed" d:Visibility="Visible">
+		<Grid x:Name="MainGrid" Visibility="Collapsed" d:Visibility="Collapsed">
 			<Grid.ColumnDefinitions>
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<ItemsControl Grid.Column="0" ItemsSource="{Binding OpenQuests}" x:Name="AvailableSource" HorizontalContentAlignment="Stretch">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<local:QuestControl Padding="1 2"/>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
-			<ItemsControl Grid.Column="1" ItemsSource="{Binding AvailableQuests}" x:Name="TriggerSource" HorizontalContentAlignment="Stretch">
-				<ItemsControl.ItemTemplate>
-					<DataTemplate>
-						<local:QuestControl Padding="1 2"/>
-					</DataTemplate>
-				</ItemsControl.ItemTemplate>
-			</ItemsControl>
+			<ScrollViewer Grid.Column="0" MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=Height}">
+				<ItemsControl ItemsSource="{Binding OpenQuests}" x:Name="AvailableSource" HorizontalContentAlignment="Stretch">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<local:QuestControl Padding="1 2"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
+			<ScrollViewer Grid.Column="1"  MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=Height}">
+				<ItemsControl ItemsSource="{Binding AvailableQuests}" x:Name="TriggerSource" HorizontalContentAlignment="Stretch">
+					<ItemsControl.ItemTemplate>
+						<DataTemplate>
+							<local:QuestControl Padding="1 2"/>
+						</DataTemplate>
+					</ItemsControl.ItemTemplate>
+				</ItemsControl>
+			</ScrollViewer>
 		</Grid>
 	</Grid>
 </Window>
