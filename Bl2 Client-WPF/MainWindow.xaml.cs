@@ -1,7 +1,8 @@
-﻿using System.Collections.ObjectModel;
+﻿using Bl2Common;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Net;
 using System.Windows;
-using Bl2Common;
 
 namespace Bl2Client {
 	public partial class MainWindow : Window {
@@ -42,6 +43,18 @@ namespace Bl2Client {
 			LoginGrid.FadeOut(200, postAction: () => MainGrid.FadeIn(400));
 		}
 
+		public void OnNewAvailableQuest(Quest q) {
+			connection.Client.Connection.SendData(Constants.PACKET_ID, new Packet(q.ID, QuestStatus.Accepted));
+		}
+
+		public void OnQuestTrigger(Quest q) {
+			connection.Client.Connection.SendData(Constants.PACKET_ID, new Packet(q.ID, QuestStatus.Triggered));
+		}
+
+		public void OnQuestDelete(Quest q) {
+			connection.Client.Connection.SendData(Constants.PACKET_ID, new Packet(q.ID, QuestStatus.Hidden));
+		}
+
 		private void OnFullSync(Quest[] obj) {
 			OpenQuests.Clear();
 			AvailableQuests.Clear();
@@ -57,7 +70,13 @@ namespace Bl2Client {
 		}
 
 		private void OnExit(object sender, RoutedEventArgs e) {
+			connection?.Client.Dispose();
 			Application.Current.Shutdown();
+		}
+
+		protected override void OnClosing(CancelEventArgs e) {
+			base.OnClosing(e);
+			connection?.Client.Dispose();
 		}
 	}
 }

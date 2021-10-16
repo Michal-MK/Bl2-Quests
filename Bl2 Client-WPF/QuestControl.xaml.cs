@@ -28,18 +28,21 @@ namespace Bl2Client {
 
 		private void OnAccept(object sender, RoutedEventArgs e) {
 			Ctx.Status = QuestStatus.Accepted;
+			Win.OnNewAvailableQuest(Ctx);
 			Win.AvailableQuests.Add(Ctx);
 			Win.OpenQuests.Remove(Ctx);
 		}
 
 		private void OnDelete(object sender, RoutedEventArgs e) {
 			Ctx.Status = QuestStatus.Hidden;
+			Win.OnQuestDelete(Ctx);
 			Win.OpenQuests.Remove(Ctx);
 			Win.AvailableQuests.Remove(Ctx);
 		}
 
 		private void OnTrigger(object sender, RoutedEventArgs e) {
 			Ctx.Status = QuestStatus.Triggered;
+			Win.OnQuestTrigger(Ctx);
 			Win.AvailableQuests.Remove(Ctx);
 		}
 	}

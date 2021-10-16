@@ -27,6 +27,13 @@ namespace Bl2Server {
 			server.OnClientDisconnected += Server_OnClientDisconnected;
 			ParseQuests();
 			server.Start(Constants.PORT);
+
+			AppDomain.CurrentDomain.ProcessExit += (sender, args) => {
+				foreach (TCPClientInfo serverConnectedClient in server.ConnectedClients) {
+					server.DisconnectClient(serverConnectedClient.ID);
+					server.Stop();
+				}
+			};
 		}
 
 		private void ParseQuests() {
