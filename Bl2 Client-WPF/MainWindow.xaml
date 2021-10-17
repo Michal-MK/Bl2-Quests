@@ -36,7 +36,7 @@
 				<ColumnDefinition/>
 				<ColumnDefinition/>
 			</Grid.ColumnDefinitions>
-			<ScrollViewer Grid.Column="0" MaxHeight="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType=Window}, Path=Height}">
+			<ScrollViewer Grid.Column="0">
 				<ItemsControl ItemsSource="{Binding OpenQuests}" x:Name="AvailableSource" HorizontalContentAlignment="Stretch">
 					<ItemsControl.ItemTemplate>
 						<DataTemplate>
