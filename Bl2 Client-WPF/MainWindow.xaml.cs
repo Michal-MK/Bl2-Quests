@@ -70,13 +70,15 @@ namespace Bl2Client {
 		}
 
 		private void OnExit(object sender, RoutedEventArgs e) {
-			connection?.Client.Dispose();
 			Application.Current.Shutdown();
 		}
 
 		protected override void OnClosing(CancelEventArgs e) {
+			if (connection != null) {
+				connection.Client.Disconnect();
+				connection.Client.Dispose();
+			}
 			base.OnClosing(e);
-			connection?.Client.Dispose();
 		}
 	}
 }

@@ -82,9 +82,6 @@ namespace Bl2Server {
 		}
 
 		internal void Restart() {
-			foreach (TCPClientInfo clientInfo in server.ConnectedClients) {
-				server.GetConnection(clientInfo.ID).SendData(1);
-			}
 			list.Clear();
 			ParseQuests();
 			server.SendToAll(Constants.PROPERTY_SYNC, list.ToArray());
